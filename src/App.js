@@ -7,13 +7,13 @@ import {
 // --- ДАННЫЕ ВАШЕГО ПАРКА ---
 const PHONE_DISPLAY = "+7 776 102 5965";
 const PHONE_CLEAN = "77761025965";
-const WHATSAPP_LINK = "https://wa.me/+77761025965"; // Новая ссылка на WhatsApp
+const WHATSAPP_LINK = "https://wa.me/+77761025965"; // Ссылка на WhatsApp
 const PARK_NAME = "Биік Шың!";
 const ADDRESS_RU = "Республика Казахстан, г. Астана, ул. Жанибека Тархана, 9";
 const ADDRESS_KZ = "Қазақстан Республикасы, Астана қ., Жәнібек Тархан көшесі, 9";
 const REGISTRATION_LINK = "https://forms.fleet.yandex.kz/forms?specification=taxi&ref_id=b14945c65dc449f286207cdfb1650fc6";
 const API_URL = "http://localhost:3001/api/baiga-leaderboard"; 
-const LOGO_URL = "5462928930428882216 (1).jpg"; 
+const LOGO_URL = "5462928930428882216.jpg"; 
 
 // --- ПЕРЕВОДЫ (ТЕКСТЫ) ---
 const TRANSLATIONS = {
@@ -184,7 +184,6 @@ const TRANSLATIONS = {
 };
 
 // --- ИКОНКИ (SVG) ---
-// Добавил width/height прямо в тег, чтобы они не растягивались без CSS
 const TiktokIcon = () => (
   <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20" className="w-5 h-5">
     <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/>
@@ -459,7 +458,6 @@ const ContactsPage = ({ t }) => (
   <div className="w-full bg-white flex-grow animate-fade-in">
     <div className="container mx-auto px-4 md:px-8 py-16">
       <h1 className="text-4xl font-bold mb-12 text-[#1d1d1d]">{t.contacts.title}</h1>
-      {/* Сетка изменена на grid-cols-2 для двух элементов (Адрес и Телефон) */}
       <div className="grid md:grid-cols-2 gap-8 max-w-4xl">
             <div className="pl-6 border-l-[4px] border-[#FFD600]">
               <h4 className="font-bold text-xl mb-3 text-[#1d1d1d]">{t.contacts.address_label}</h4>
@@ -469,7 +467,6 @@ const ContactsPage = ({ t }) => (
               <h4 className="font-bold text-xl mb-3 text-[#1d1d1d]">{t.contacts.phone_label}</h4>
               <p className="text-gray-600 text-base font-medium">{PHONE_DISPLAY}</p>
             </div>
-            {/* Instagram и TikTok удалены */}
       </div>
     </div>
   </div>
@@ -486,7 +483,6 @@ export default function App() {
 
   const t = TRANSLATIONS[language]; // Текущие переводы
 
-  // === АВТОМАТИЧЕСКАЯ ПОДГРУЗКА СТИЛЕЙ (ЕСЛИ ИХ НЕТ) ===
   useEffect(() => {
     const checkAndLoadTailwind = () => {
       const existingScript = document.querySelector('script[src*="tailwindcss"]');
@@ -516,16 +512,15 @@ export default function App() {
                 <img 
                   src={LOGO_URL} 
                   alt="Logo" 
-                  className="w-32 h-32 md:w-40 md:h-40 rounded-full border-2 border-yellow-200 object-cover shadow-md"
+                  className="w-32 h-32 md:w-40 md:h-40 rounded-full border-0 object-cover shadow-md"
                   onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'flex'; }}
                 />
-                <div className="w-32 h-32 md:w-40 md:h-40 bg-black rounded-full border-2 border-[#444] shadow-lg hidden items-center justify-center">
+                <div className="w-32 h-32 md:w-40 md:h-40 bg-black rounded-full shadow-lg hidden items-center justify-center">
                    <span className="text-[#FFD600] font-bold text-5xl italic">Б</span>
                 </div>
             </div>
 
             <nav className="hidden lg:flex items-center gap-8 xl:gap-12 font-semibold text-[15px] text-[#1d1d1d]">
-              {/* Dropdown "Работа" */}
               <div className="relative group" onMouseEnter={() => setIsWorkDropdownOpen(true)} onMouseLeave={() => setIsWorkDropdownOpen(false)}>
                 <div className="flex items-center gap-1 cursor-pointer hover:opacity-70 transition py-2">
                   {t.nav.work} <ChevronDown size={14} />
@@ -553,7 +548,6 @@ export default function App() {
               <button onClick={() => setCurrentView('kaspi')} className={`hover:opacity-70 transition ${currentView === 'kaspi' ? 'opacity-70' : ''}`}>{t.nav.kaspi}</button>
               <button onClick={() => setCurrentView('baiga')} className={`hover:opacity-70 transition ${currentView === 'baiga' ? 'opacity-70' : ''}`}>{t.nav.baiga}</button>
               
-              {/* Dropdown "О Нас" */}
               <div className="relative group" onMouseEnter={() => setIsAboutDropdownOpen(true)} onMouseLeave={() => setIsAboutDropdownOpen(false)}>
                 <div className="flex items-center gap-1 cursor-pointer hover:opacity-70 transition py-2">
                    {t.nav.about} <ChevronDown size={14} />
@@ -574,9 +568,8 @@ export default function App() {
             </nav>
 
             <div className="hidden lg:flex items-center gap-6">
-              <a href={`tel:${PHONE_CLEAN}`} className="flex items-center gap-2 font-bold text-lg hover:opacity-70 transition"><WhatsappIcon /> {PHONE_DISPLAY}</a>
+              <a href={WHATSAPP_LINK} target="_blank" rel="noreferrer" className="flex items-center gap-2 font-bold text-lg hover:opacity-70 transition"><WhatsappIcon /> {PHONE_DISPLAY}</a>
               
-              {/* ПЕРЕКЛЮЧАТЕЛЬ ЯЗЫКОВ */}
               <div className="relative group">
                   <button className="font-bold cursor-pointer flex items-center gap-1 uppercase">
                       {language === 'ru' ? 'РУС' : 'ҚАЗ'} <ChevronDown size={14} />
@@ -606,7 +599,7 @@ export default function App() {
                     <button onClick={() => setLanguage('ru')} className={`font-bold ${language === 'ru' ? 'text-white' : ''}`}>РУС</button>
                     <button onClick={() => setLanguage('kz')} className={`font-bold ${language === 'kz' ? 'text-white' : ''}`}>ҚАЗ</button>
                 </div>
-                <a href={`tel:${PHONE_CLEAN}`} className="flex items-center gap-3 text-2xl mt-4"><WhatsappIcon /> {PHONE_DISPLAY}</a>
+                <a href={WHATSAPP_LINK} target="_blank" rel="noreferrer" className="flex items-center gap-3 text-2xl mt-4"><WhatsappIcon /> {PHONE_DISPLAY}</a>
               </nav>
             </div>
           )}
@@ -630,7 +623,7 @@ export default function App() {
                <img 
                   src={LOGO_URL} 
                   alt="Logo" 
-                  className="w-20 h-20 rounded-full border-2 border-gray-600 object-cover"
+                  className="w-20 h-20 rounded-full border-0 object-cover"
                   onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'flex'; }}
                />
                <div className="w-20 h-20 bg-black rounded-full border border-gray-600 hidden items-center justify-center text-[#FFD600] font-bold text-2xl">Б</div>
@@ -641,8 +634,12 @@ export default function App() {
           <div>
             <h4 className="font-bold text-white mb-6 text-lg">{t.footer.support}</h4>
             <ul className="space-y-5 text-gray-400 text-sm font-medium">
-              <li className="hover:text-white cursor-pointer transition">{t.footer.phone}</li>
-              <li className="hover:text-white cursor-pointer transition">{t.footer.whatsapp}</li>
+              <li>
+                <a href={WHATSAPP_LINK} target="_blank" rel="noreferrer" className="hover:text-white cursor-pointer transition">{t.footer.phone}</a>
+              </li>
+              <li>
+                <a href={WHATSAPP_LINK} target="_blank" rel="noreferrer" className="hover:text-white cursor-pointer transition">{t.footer.whatsapp}</a>
+              </li>
             </ul>
           </div>
           <div>
