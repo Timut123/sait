@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { 
-  Menu, X, ChevronDown, Clock, Smartphone, Instagram, 
+  Phone, Menu, X, ChevronDown, Clock, Smartphone, Instagram, 
   Car, Truck, Bike, MapPin, FileText
 } from 'lucide-react';
 
@@ -295,7 +295,7 @@ const ContactsPage = () => (
   <div className="w-full bg-white flex-grow animate-fade-in">
     <div className="container mx-auto px-4 md:px-8 py-16">
       <h1 className="text-4xl font-bold mb-12 text-[#1d1d1d]">Контакты</h1>
-      <div className="grid md:grid-cols-4 gap-8">
+      <div className="grid md:grid-cols-2 gap-8 max-w-4xl">
             <div className="pl-6 border-l-[4px] border-[#FFD600]">
               <h4 className="font-bold text-xl mb-3 text-[#1d1d1d]">Адрес</h4>
               <p className="text-gray-600 leading-relaxed text-base">{ADDRESS}</p>
@@ -303,14 +303,6 @@ const ContactsPage = () => (
             <div className="pl-6 border-l-[4px] border-[#FFD600]">
               <h4 className="font-bold text-xl mb-3 text-[#1d1d1d]">Телефон</h4>
               <p className="text-gray-600 text-base font-medium">{PHONE_DISPLAY}</p>
-            </div>
-            <div className="pl-6 border-l-[4px] border-[#FFD600]">
-              <h4 className="font-bold text-xl mb-3 text-[#1d1d1d]">Instagram</h4>
-              <a href="/" className="text-gray-600 text-base hover:text-[#FFD600] transition">@allkz.pro</a>
-            </div>
-            <div className="pl-6 border-l-[4px] border-[#FFD600]">
-              <h4 className="font-bold text-xl mb-3 text-[#1d1d1d]">TikTok</h4>
-              <a href="/" className="text-gray-600 text-base hover:text-[#FFD600] transition">@all___kz</a>
             </div>
       </div>
     </div>
@@ -355,11 +347,11 @@ export default function App() {
                 <img 
                   src={LOGO_URL} 
                   alt="Logo" 
-                  className="w-16 h-16 rounded-full border-2 border-yellow-200 object-cover shadow-md"
+                  className="w-24 h-24 rounded-full border-2 border-yellow-200 object-cover shadow-md"
                   onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'flex'; }}
                 />
-                <div className="w-14 h-14 bg-black rounded-full border-2 border-[#444] shadow-lg hidden items-center justify-center">
-                   <span className="text-[#FFD600] font-bold text-xl italic">Б</span>
+                <div className="w-24 h-24 bg-black rounded-full border-2 border-[#444] shadow-lg hidden items-center justify-center">
+                   <span className="text-[#FFD600] font-bold text-3xl italic">Б</span>
                 </div>
             </div>
 
