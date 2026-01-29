@@ -7,11 +7,181 @@ import {
 // --- ДАННЫЕ ВАШЕГО ПАРКА ---
 const PHONE_DISPLAY = "+7 776 102 5965";
 const PHONE_CLEAN = "77761025965";
+const WHATSAPP_LINK = "https://wa.me/+77761025965"; // Новая ссылка на WhatsApp
 const PARK_NAME = "Биік Шың!";
-const ADDRESS = "Республика Казахстан, г. Астана, ул. Жанибека Тархана, 9";
+const ADDRESS_RU = "Республика Казахстан, г. Астана, ул. Жанибека Тархана, 9";
+const ADDRESS_KZ = "Қазақстан Республикасы, Астана қ., Жәнібек Тархан көшесі, 9";
 const REGISTRATION_LINK = "https://forms.fleet.yandex.kz/forms?specification=taxi&ref_id=b14945c65dc449f286207cdfb1650fc6";
 const API_URL = "http://localhost:3001/api/baiga-leaderboard"; 
-const LOGO_URL = "5462928930428882216 (1).jpg"; 
+const LOGO_URL = "5462928930428882216.jpg"; 
+
+// --- ПЕРЕВОДЫ (ТЕКСТЫ) ---
+const TRANSLATIONS = {
+  ru: {
+    nav: {
+      work: "Работа",
+      kaspi: "Kaspi QR",
+      baiga: "Байга",
+      about: "О Нас",
+      driver: "Водителем",
+      courier: "Курьером",
+      cargo: "Водителем грузового авто",
+      conditions: "Условия Таксопарка",
+      contacts: "Контакты",
+      work_desc_driver: "Безопасные поездки и стабильный доход",
+      work_desc_courier: "Доставка заказов на гибких условиях",
+      work_desc_cargo: "Перевозка грузов с выгодой",
+      apply: "Подать заявку",
+      call: "Позвонить"
+    },
+    hero: {
+      call: "Позвонить",
+      become_driver: "Стать Водителем",
+      title: "Станьте водителем Яндекс такси по Казахстану"
+    },
+    benefits: {
+      fast_connect: "Быстрое подключение",
+      fast_connect_desc: "Подключим Вас к Яндекс такси с лучшими условиями по всему Казахстану за кратчайшие сроки!",
+      app: "Удобное приложение",
+      app_desc: "Даже если у Вас нет опыта работы вы быстро научитесь, благодаря удобному интерфейсу.",
+      support: "Круглосуточная поддержка",
+      support_desc: "Если у Вас возникнут вопросы по работе, Вы в любое время можете написать в тех. поддержку."
+    },
+    faq: {
+      title: "Частые вопросы",
+      q1: "Как зарегистрироваться в Яндекс такси по Казахстану на своем автомобиле?",
+      a1: `Для регистрации отправьте фотографии лицевых сторон водительского удостоверения и техпаспорта через WhatsApp на номер телефона: ${PHONE_DISPLAY}`,
+      q2: "Какой таксопарк выбрать в Яндекс такси Казахстан?",
+      a2: `При выборе таксопарка нужно учитывать рентабельность комиссии и своевременное подключение техподдержки в сложных ситуациях. Мы рекомендуем таксопарк "${PARK_NAME}".`
+    },
+    kaspi: {
+      title: "Kaspi QR",
+      generate: "СГЕНЕРИРОВАТЬ QR",
+      desc: "Сгенерируйте QR код для пополнения счёта пассажиром",
+      placeholder: "+7 (702) 888-4911"
+    },
+    baiga: {
+      title: "Байга",
+      subtitle: "Участники проекта «Шаңырақ» получают призы в 2 раза больше.",
+      list_title: "Список лидеров",
+      tab_almaty: "Алматы и Астана",
+      tab_regions: "Регионы",
+      th_place: "Место",
+      th_driver: "Водитель",
+      th_amount: "Сумма заказов (₸)",
+      th_city: "Город",
+      footer_update: "Данные по состоянию на",
+      footer_rule: "Призы в акции «Бәйге» получают водители, выполнившие заказы на сумму не менее 150 000 тенге."
+    },
+    rules: {
+      title: `Условия таксопарка ${PARK_NAME}`,
+      intro: `Таксопарк ${PARK_NAME} предлагает самые выгодные условия для своих водителей.`,
+      r1: "1. Круглосуточная техподдержка 24/7. Мы работаем без выходных. Ответим на ваши вопросы даже в выходные и праздничные дни.",
+      r2: "2. У нас самая низкая комиссия. Для наших водителей мы установили низкую комиссию - 1%.",
+      r3: "3. Моментальная выплата. Вам не придётся писать и ждать свой заработок. Напрямую через приложение Яндекс.Про, без скачивания сторонних программ, можете моментально вывести свои деньги.",
+      r4: "4. Для своих водителей мы предлагаем самую низкую цену на страхование и техосмотр.",
+      r5: "5. Индивидуальные условия для лучших водителей.",
+      outro: "Приходите регистрацию и начните зарабатывать с лучшим таксопарком в регионе."
+    },
+    contacts: {
+      title: "Контакты",
+      address_label: "Адрес",
+      phone_label: "Телефон",
+      address_value: ADDRESS_RU
+    },
+    footer: {
+      support: "Поддержка",
+      legal: "Юридическое",
+      phone: "телефон",
+      whatsapp: "WhatsApp",
+      policy: "Политика Конфиденциальности",
+      terms: "Условия",
+      copyright: `Партнер Яндекс GO таксопарк ${PARK_NAME}.`
+    }
+  },
+  kz: {
+    nav: {
+      work: "Жұмыс",
+      kaspi: "Kaspi QR",
+      baiga: "Бәйге",
+      about: "Біз туралы",
+      driver: "Жүргізуші",
+      courier: "Курьер",
+      cargo: "Жүк көлігі жүргізушісі",
+      conditions: "Таксопарк шарттары",
+      contacts: "Байланыс",
+      work_desc_driver: "Қауіпсіз сапарлар және тұрақты табыс",
+      work_desc_courier: "Икемді шарттармен тапсырыс жеткізу",
+      work_desc_cargo: "Жүктерді тиімді тасымалдау",
+      apply: "Өтініш қалдыру",
+      call: "Қоңырау шалу"
+    },
+    hero: {
+      call: "Қоңырау шалу",
+      become_driver: "Жүргізуші болу",
+      title: "Қазақстан бойынша Яндекс такси жүргізушісі болыңыз"
+    },
+    benefits: {
+      fast_connect: "Тез қосылу",
+      fast_connect_desc: "Сізді Қазақстан бойынша ең жақсы шарттармен Яндекс таксиге қысқа мерзімде қосамыз!",
+      app: "Ыңғайлы қосымша",
+      app_desc: "Тәжірибесі жоқ болса да, ыңғайлы интерфейс арқылы тез үйреніп кетесіз.",
+      support: "Тәуліктік қолдау",
+      support_desc: "Жұмыс барысында сұрақтарыңыз болса, кез келген уақытта техникалық қолдауға жаза аласыз."
+    },
+    faq: {
+      title: "Жиі қойылатын сұрақтар",
+      q1: "Өз автокөлігіммен Қазақстан бойынша Яндекс таксиге қалай тіркелуге болады?",
+      a1: `Тіркелу үшін жүргізуші куәлігі мен техпаспорттың беттерін WhatsApp арқылы мына нөмірге жіберіңіз: ${PHONE_DISPLAY}`,
+      q2: "Қазақстанда қандай таксопарк таңдау керек?",
+      a2: `Таксопарк таңдағанда комиссия мен техникалық қолдаудың сапасына назар аудару керек. Біз "${PARK_NAME}" таксопаркін ұсынамыз.`
+    },
+    kaspi: {
+      title: "Kaspi QR",
+      generate: "QR ГЕНЕРАЦИЯЛАУ",
+      desc: "Жолаушы шотыңызды толтыру үшін QR кодты генерациялаңыз",
+      placeholder: "+7 (702) 888-4911"
+    },
+    baiga: {
+      title: "Бәйге",
+      subtitle: "«Шаңырақ» жобасының қатысушылары сыйлықтарды 2 есе көп алады.",
+      list_title: "Көшбасшылар тізімі",
+      tab_almaty: "Алматы және Астана",
+      tab_regions: "Аймақтар",
+      th_place: "Орын",
+      th_driver: "Жүргізуші",
+      th_amount: "Тапсырыс сомасы (₸)",
+      th_city: "Қала",
+      footer_update: "Мәлімет жаңартылды:",
+      footer_rule: "«Бәйге» акциясында 150 000 теңгеден кем емес сомаға тапсырыс орындаған жүргізушілер сыйлық алады."
+    },
+    rules: {
+      title: `${PARK_NAME} таксопарк шарттары`,
+      intro: `${PARK_NAME} таксопаркі жүргізушілер үшін ең тиімді шарттарды ұсынады.`,
+      r1: "1. Тәуліктік техникалық қолдау 24/7. Біз демалыссыз жұмыс істейміз. Сұрақтарыңызға демалыс және мереке күндері де жауап береміз.",
+      r2: "2. Бізде ең төмен комиссия. Жүргізушілер үшін 1% комиссия бекіттік.",
+      r3: "3. Жедел төлем. Табысыңызды күтпей-ақ аласыз. Яндекс.Про қосымшасы арқылы ақшаңызды бірден шығарып ала аласыз.",
+      r4: "4. Жүргізушілер үшін сақтандыру мен техникалық тексерістен өту ең төмен бағамен.",
+      r5: "5. Үздік жүргізушілерге жеке шарттар.",
+      outro: "Тіркеліп, аймақтағы үздік таксопаркпен табыс табуды бастаңыз."
+    },
+    contacts: {
+      title: "Байланыс",
+      address_label: "Мекенжай",
+      phone_label: "Телефон",
+      address_value: ADDRESS_KZ
+    },
+    footer: {
+      support: "Қолдау",
+      legal: "Заңдық",
+      phone: "телефон",
+      whatsapp: "WhatsApp",
+      policy: "Құпиялылық саясаты",
+      terms: "Ережелер",
+      copyright: `Яндекс GO серіктес таксопаркі ${PARK_NAME}.`
+    }
+  }
+};
 
 // --- ИКОНКИ (SVG) ---
 // Добавил width/height прямо в тег, чтобы они не растягивались без CSS
@@ -61,7 +231,7 @@ const FaqItem = ({ question, answer }) => {
 // ================== СТРАНИЦЫ ==================
 
 // 1. ГЛАВНАЯ
-const HomePage = () => (
+const HomePage = ({ t }) => (
   <div className="w-full bg-[#FFD600] min-h-screen flex flex-col">
     {/* HERO CONTAINER */}
     <div className="flex-grow flex flex-col container mx-auto px-4 md:px-8 relative">
@@ -72,15 +242,15 @@ const HomePage = () => (
           href={`tel:${PHONE_CLEAN}`} 
           className="bg-[#2C2C2C] hover:bg-black text-white px-8 py-3 rounded-lg font-bold text-lg shadow-lg transition text-center min-w-[160px]"
         >
-          Позвонить
+          {t.hero.call}
         </a>
         <a 
-          href={REGISTRATION_LINK} 
+          href={WHATSAPP_LINK} 
           target="_blank" 
           rel="noreferrer" 
           className="bg-[#00D756] hover:bg-[#00c04b] text-white px-8 py-3 rounded-lg font-bold text-lg shadow-lg transition flex items-center justify-center gap-2 min-w-[220px]"
         >
-          Стать Водителем <WhatsappIcon />
+          {t.hero.become_driver} <WhatsappIcon />
         </a>
       </div>
 
@@ -98,7 +268,7 @@ const HomePage = () => (
 
       {/* ЗАГОЛОВОК (Низ) */}
       <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-center leading-tight mb-12 lg:mb-16 text-[#1d1d1d]">
-        Станьте водителем Яндекс такси по Казахстану
+        {t.hero.title}
       </h1>
     </div>
 
@@ -116,10 +286,8 @@ const HomePage = () => (
                    </div>
                 </div>
              </div>
-             <h3 className="text-2xl font-bold mb-4 text-[#1d1d1d]">Быстрое подключение</h3>
-             <p className="text-gray-600 text-lg leading-relaxed">
-               Подключим Вас к Яндекс такси с лучшими условиями по всему Казахстану за кратчайшие сроки!
-             </p>
+             <h3 className="text-2xl font-bold mb-4 text-[#1d1d1d]">{t.benefits.fast_connect}</h3>
+             <p className="text-gray-600 text-lg leading-relaxed">{t.benefits.fast_connect_desc}</p>
           </div>
 
           {/* Card 2 */}
@@ -132,10 +300,8 @@ const HomePage = () => (
                    </div>
                 </div>
              </div>
-             <h3 className="text-2xl font-bold mb-4 text-[#1d1d1d]">Удобное приложение</h3>
-             <p className="text-gray-600 text-lg leading-relaxed">
-               Даже если у Вас нет опыта работы вы быстро научитесь, благодаря удобному интерфейсу.
-             </p>
+             <h3 className="text-2xl font-bold mb-4 text-[#1d1d1d]">{t.benefits.app}</h3>
+             <p className="text-gray-600 text-lg leading-relaxed">{t.benefits.app_desc}</p>
           </div>
 
           {/* Card 3 */}
@@ -148,10 +314,8 @@ const HomePage = () => (
                    </div>
                 </div>
              </div>
-             <h3 className="text-2xl font-bold mb-4 text-[#1d1d1d]">Круглосуточная поддержка</h3>
-             <p className="text-gray-600 text-lg leading-relaxed">
-               Если у Вас возникнут вопросы по работе, Вы в любое время можете написать в тех. поддержку.
-             </p>
+             <h3 className="text-2xl font-bold mb-4 text-[#1d1d1d]">{t.benefits.support}</h3>
+             <p className="text-gray-600 text-lg leading-relaxed">{t.benefits.support_desc}</p>
           </div>
         </div>
       </div>
@@ -160,10 +324,10 @@ const HomePage = () => (
     {/* FAQ (Белый фон) */}
     <div className="bg-white pb-24 w-full">
       <div className="container mx-auto px-4 md:px-8">
-        <h2 className="text-3xl font-bold mb-10 text-[#1d1d1d]">Частые вопросы</h2>
+        <h2 className="text-3xl font-bold mb-10 text-[#1d1d1d]">{t.faq.title}</h2>
         <div className="border-t border-gray-200/70">
-          <FaqItem question="Как зарегистрироваться в Яндекс такси по Казахстану на своем автомобиле?" answer={`Для регистрации отправьте фотографии лицевых сторон водительского удостоверения и техпаспорта через WhatsApp на номер телефона: ${PHONE_DISPLAY}`} />
-          <FaqItem question="Какой таксопарк выбрать в Яндекс такси Казахстан?" answer={`При выборе таксопарка нужно учитывать рентабельность комиссии и своевременное подключение техподдержки в сложных ситуациях. Мы рекомендуем таксопарк "${PARK_NAME}".`} />
+          <FaqItem question={t.faq.q1} answer={t.faq.a1} />
+          <FaqItem question={t.faq.q2} answer={t.faq.a2} />
         </div>
       </div>
     </div>
@@ -171,21 +335,21 @@ const HomePage = () => (
 );
 
 // 2. KASPI QR
-const KaspiQrPage = () => (
+const KaspiQrPage = ({ t }) => (
   <div className="flex-grow bg-white py-20 min-h-[60vh] flex flex-col items-start justify-center animate-fade-in w-full">
     <div className="container mx-auto px-4 md:px-8 max-w-6xl">
-      <h1 className="text-3xl font-bold mb-10 text-[#1d1d1d]">Kaspi QR</h1>
+      <h1 className="text-3xl font-bold mb-10 text-[#1d1d1d]">{t.kaspi.title}</h1>
       <div className="flex flex-col md:flex-row gap-6 items-stretch w-full">
-        <input type="text" placeholder="+7 (702) 888-4911" className="bg-[#EFF2F7] border-none rounded-md px-6 py-4 text-lg w-full md:w-2/3 outline-none focus:ring-2 focus:ring-[#FFD600] text-gray-700" />
-        <button className="bg-[#FFD600] hover:bg-[#e6c200] text-[#1d1d1d] font-bold px-8 py-4 rounded-md uppercase tracking-wide transition shadow-sm w-full md:w-1/3">Сгенерировать QR</button>
+        <input type="text" placeholder={t.kaspi.placeholder} className="bg-[#EFF2F7] border-none rounded-md px-6 py-4 text-lg w-full md:w-2/3 outline-none focus:ring-2 focus:ring-[#FFD600] text-gray-700" />
+        <button className="bg-[#FFD600] hover:bg-[#e6c200] text-[#1d1d1d] font-bold px-8 py-4 rounded-md uppercase tracking-wide transition shadow-sm w-full md:w-1/3">{t.kaspi.generate}</button>
       </div>
-      <p className="text-gray-500 mt-8 text-lg">Сгенерируйте QR код для пополнения счёта пассажиром</p>
+      <p className="text-gray-500 mt-8 text-lg">{t.kaspi.desc}</p>
     </div>
   </div>
 );
 
 // 3. БАЙГА
-const BaigaPage = () => {
+const BaigaPage = ({ t }) => {
   const [activeTab, setActiveTab] = useState('almaty');
   const [drivers, setDrivers] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -211,27 +375,27 @@ const BaigaPage = () => {
     <div className="flex-grow bg-white py-12 animate-fade-in w-full">
       <div className="container mx-auto px-4 md:px-8">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
-          <h1 className="text-3xl font-bold text-[#1d1d1d]">Байга</h1>
-          <p className="text-gray-600 text-sm md:text-base max-w-md text-right md:text-right">Участники проекта «Шаңырақ» получают призы в 2 раза больше.</p>
+          <h1 className="text-3xl font-bold text-[#1d1d1d]">{t.baiga.title}</h1>
+          <p className="text-gray-600 text-sm md:text-base max-w-md text-right md:text-right">{t.baiga.subtitle}</p>
         </div>
         <div className="flex items-center gap-4 mb-6">
-          <h2 className="text-xl text-gray-600">Список лидеров</h2>
+          <h2 className="text-xl text-gray-600">{t.baiga.list_title}</h2>
           {isLoading && <span className="text-sm text-yellow-600 font-bold animate-pulse">Загрузка данных...</span>}
         </div>
         
         <div className="flex gap-4 mb-8">
-          <button onClick={() => setActiveTab('almaty')} className={`px-6 py-3 font-bold text-sm uppercase tracking-wide rounded transition ${activeTab === 'almaty' ? 'bg-[#FFD600] text-[#1d1d1d]' : 'bg-[#FFD600] text-[#1d1d1d] opacity-50 hover:opacity-100'}`}>Алматы и Астана</button>
-          <button onClick={() => setActiveTab('regions')} className={`px-6 py-3 font-bold text-sm uppercase tracking-wide rounded transition ${activeTab === 'regions' ? 'bg-[#FFD600] text-[#1d1d1d]' : 'bg-[#FFD600] text-[#1d1d1d] opacity-50 hover:opacity-100'}`}>Регионы</button>
+          <button onClick={() => setActiveTab('almaty')} className={`px-6 py-3 font-bold text-sm uppercase tracking-wide rounded transition ${activeTab === 'almaty' ? 'bg-[#FFD600] text-[#1d1d1d]' : 'bg-[#FFD600] text-[#1d1d1d] opacity-50 hover:opacity-100'}`}>{t.baiga.tab_almaty}</button>
+          <button onClick={() => setActiveTab('regions')} className={`px-6 py-3 font-bold text-sm uppercase tracking-wide rounded transition ${activeTab === 'regions' ? 'bg-[#FFD600] text-[#1d1d1d]' : 'bg-[#FFD600] text-[#1d1d1d] opacity-50 hover:opacity-100'}`}>{t.baiga.tab_regions}</button>
         </div>
 
         <div className="overflow-x-auto">
           <table className="w-full min-w-[600px] border-collapse">
             <thead>
               <tr className="text-left border-b border-gray-100">
-                <th className="py-4 font-bold text-[#1d1d1d] w-20">Место</th>
-                <th className="py-4 font-bold text-[#1d1d1d]">Водитель</th>
-                <th className="py-4 font-bold text-[#1d1d1d]">Сумма заказов (₸)</th>
-                <th className="py-4 font-bold text-[#1d1d1d] text-right pr-4">Город</th>
+                <th className="py-4 font-bold text-[#1d1d1d] w-20">{t.baiga.th_place}</th>
+                <th className="py-4 font-bold text-[#1d1d1d]">{t.baiga.th_driver}</th>
+                <th className="py-4 font-bold text-[#1d1d1d]">{t.baiga.th_amount}</th>
+                <th className="py-4 font-bold text-[#1d1d1d] text-right pr-4">{t.baiga.th_city}</th>
               </tr>
             </thead>
             <tbody>
@@ -247,8 +411,8 @@ const BaigaPage = () => {
           </table>
         </div>
         <div className="mt-12 space-y-4 text-gray-800 text-sm md:text-base">
-           <p>Данные по состоянию на {new Date().toISOString().split('T')[0]} 04:15</p>
-           <p className="max-w-4xl">Призы в акции «Бәйге» получают водители, выполнившие заказы на сумму не менее 150 000 тенге.</p>
+           <p>{t.baiga.footer_update} {new Date().toISOString().split('T')[0]} 04:15</p>
+           <p className="max-w-4xl">{t.baiga.footer_rule}</p>
         </div>
       </div>
     </div>
@@ -256,21 +420,21 @@ const BaigaPage = () => {
 };
 
 // 4. СТРАНИЦА: УСЛОВИЯ
-const RulesPage = () => (
+const RulesPage = ({ t }) => (
   <div className="w-full bg-[#FFD600] min-h-[85vh] flex items-center relative overflow-hidden animate-fade-in">
     <div className="container mx-auto px-4 md:px-8 py-16 grid lg:grid-cols-2 gap-12 items-center relative z-10">
       
       <div className="text-[#1d1d1d]">
-        <h1 className="text-3xl md:text-5xl font-bold mb-4 leading-tight">Условия таксопарка {PARK_NAME}</h1>
-        <p className="text-lg md:text-xl mb-10 opacity-90">Таксопарк {PARK_NAME} предлагает самые выгодные условия для своих водителей.</p>
+        <h1 className="text-3xl md:text-5xl font-bold mb-4 leading-tight">{t.rules.title}</h1>
+        <p className="text-lg md:text-xl mb-10 opacity-90">{t.rules.intro}</p>
         <div className="space-y-6 text-base md:text-lg font-medium leading-snug">
-          <p>1. Круглосуточная техподдержка 24/7. Мы работаем без выходных. Ответим на ваши вопросы даже в выходные и праздничные дни.</p>
-          <p>2. У нас самая низкая комиссия. Для наших водителей мы установили низкую комиссию - 1%.</p>
-          <p>3. Моментальная выплата. Вам не придётся писать и ждать свой заработок. Напрямую через приложение Яндекс.Про, без скачивания сторонних программ, можете моментально вывести свои деньги.</p>
-          <p>4. Для своих водителей мы предлагаем самую низкую цену на страхование и техосмотр.</p>
-          <p>5. Индивидуальные условия для лучших водителей.</p>
+          <p>{t.rules.r1}</p>
+          <p>{t.rules.r2}</p>
+          <p>{t.rules.r3}</p>
+          <p>{t.rules.r4}</p>
+          <p>{t.rules.r5}</p>
         </div>
-        <p className="mt-10 text-lg opacity-80">Приходите регистрацию и начните зарабатывать с лучшим таксопарком в регионе.</p>
+        <p className="mt-10 text-lg opacity-80">{t.rules.outro}</p>
       </div>
 
       <div className="relative flex justify-center lg:justify-end mt-8 lg:mt-0">
@@ -291,19 +455,21 @@ const RulesPage = () => (
 );
 
 // 5. СТРАНИЦА: КОНТАКТЫ
-const ContactsPage = () => (
+const ContactsPage = ({ t }) => (
   <div className="w-full bg-white flex-grow animate-fade-in">
     <div className="container mx-auto px-4 md:px-8 py-16">
-      <h1 className="text-4xl font-bold mb-12 text-[#1d1d1d]">Контакты</h1>
+      <h1 className="text-4xl font-bold mb-12 text-[#1d1d1d]">{t.contacts.title}</h1>
+      {/* Сетка изменена на grid-cols-2 для двух элементов (Адрес и Телефон) */}
       <div className="grid md:grid-cols-2 gap-8 max-w-4xl">
             <div className="pl-6 border-l-[4px] border-[#FFD600]">
-              <h4 className="font-bold text-xl mb-3 text-[#1d1d1d]">Адрес</h4>
-              <p className="text-gray-600 leading-relaxed text-base">{ADDRESS}</p>
+              <h4 className="font-bold text-xl mb-3 text-[#1d1d1d]">{t.contacts.address_label}</h4>
+              <p className="text-gray-600 leading-relaxed text-base">{t.contacts.address_value}</p>
             </div>
             <div className="pl-6 border-l-[4px] border-[#FFD600]">
-              <h4 className="font-bold text-xl mb-3 text-[#1d1d1d]">Телефон</h4>
+              <h4 className="font-bold text-xl mb-3 text-[#1d1d1d]">{t.contacts.phone_label}</h4>
               <p className="text-gray-600 text-base font-medium">{PHONE_DISPLAY}</p>
             </div>
+            {/* Instagram и TikTok удалены */}
       </div>
     </div>
   </div>
@@ -316,6 +482,9 @@ export default function App() {
   const [currentView, setCurrentView] = useState('home'); 
   const [isWorkDropdownOpen, setIsWorkDropdownOpen] = useState(false);
   const [isAboutDropdownOpen, setIsAboutDropdownOpen] = useState(false);
+  const [language, setLanguage] = useState('ru'); // 'ru' or 'kz'
+
+  const t = TRANSLATIONS[language]; // Текущие переводы
 
   // === АВТОМАТИЧЕСКАЯ ПОДГРУЗКА СТИЛЕЙ (ЕСЛИ ИХ НЕТ) ===
   useEffect(() => {
@@ -347,11 +516,11 @@ export default function App() {
                 <img 
                   src={LOGO_URL} 
                   alt="Logo" 
-                  className="w-24 h-24 rounded-full border-2 border-yellow-200 object-cover shadow-md"
+                  className="w-16 h-16 rounded-full border-2 border-yellow-200 object-cover shadow-md"
                   onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'flex'; }}
                 />
-                <div className="w-24 h-24 bg-black rounded-full border-2 border-[#444] shadow-lg hidden items-center justify-center">
-                   <span className="text-[#FFD600] font-bold text-3xl italic">Б</span>
+                <div className="w-14 h-14 bg-black rounded-full border-2 border-[#444] shadow-lg hidden items-center justify-center">
+                   <span className="text-[#FFD600] font-bold text-xl italic">Б</span>
                 </div>
             </div>
 
@@ -359,44 +528,44 @@ export default function App() {
               {/* Dropdown "Работа" */}
               <div className="relative group" onMouseEnter={() => setIsWorkDropdownOpen(true)} onMouseLeave={() => setIsWorkDropdownOpen(false)}>
                 <div className="flex items-center gap-1 cursor-pointer hover:opacity-70 transition py-2">
-                  Работа <ChevronDown size={14} />
+                  {t.nav.work} <ChevronDown size={14} />
                 </div>
                 {isWorkDropdownOpen && (
                   <div className="absolute top-full left-[-50px] w-[380px] bg-white shadow-2xl rounded-2xl p-2 z-50 animate-fade-in mt-2 border border-gray-100">
                     <div className="flex flex-col p-2">
                       <a href={REGISTRATION_LINK} target="_blank" rel="noreferrer" className="flex items-start gap-4 p-3 hover:bg-gray-50 rounded-xl transition group/item">
                          <div className="text-gray-400 group-hover/item:text-[#FFD600] mt-1"><Car size={20} /></div>
-                         <div><div className="font-bold text-base text-gray-900">Водителем</div><div className="text-xs text-gray-500 mt-1">Безопасные поездки и стабильный доход</div></div>
+                         <div><div className="font-bold text-base text-gray-900">{t.nav.driver}</div><div className="text-xs text-gray-500 mt-1">{t.nav.work_desc_driver}</div></div>
                       </a>
                       <a href={REGISTRATION_LINK} target="_blank" rel="noreferrer" className="flex items-start gap-4 p-3 hover:bg-gray-50 rounded-xl transition group/item">
                          <div className="text-gray-400 group-hover/item:text-[#FFD600] mt-1"><Bike size={20} /></div>
-                         <div><div className="font-bold text-base text-gray-900">Курьером</div><div className="text-xs text-gray-500 mt-1">Доставка заказов на гибких условиях</div></div>
+                         <div><div className="font-bold text-base text-gray-900">{t.nav.courier}</div><div className="text-xs text-gray-500 mt-1">{t.nav.work_desc_courier}</div></div>
                       </a>
                       <a href={REGISTRATION_LINK} target="_blank" rel="noreferrer" className="flex items-start gap-4 p-3 hover:bg-gray-50 rounded-xl transition group/item">
                          <div className="text-gray-400 group-hover/item:text-[#FFD600] mt-1"><Truck size={20} /></div>
-                         <div><div className="font-bold text-base text-gray-900">Водителем грузового авто</div><div className="text-xs text-gray-500 mt-1">Перевозка грузов с выгодой</div></div>
+                         <div><div className="font-bold text-base text-gray-900">{t.nav.cargo}</div><div className="text-xs text-gray-500 mt-1">{t.nav.work_desc_cargo}</div></div>
                       </a>
                     </div>
                   </div>
                 )}
               </div>
 
-              <button onClick={() => setCurrentView('kaspi')} className={`hover:opacity-70 transition ${currentView === 'kaspi' ? 'opacity-70' : ''}`}>Kaspi QR</button>
-              <button onClick={() => setCurrentView('baiga')} className={`hover:opacity-70 transition ${currentView === 'baiga' ? 'opacity-70' : ''}`}>Байга</button>
+              <button onClick={() => setCurrentView('kaspi')} className={`hover:opacity-70 transition ${currentView === 'kaspi' ? 'opacity-70' : ''}`}>{t.nav.kaspi}</button>
+              <button onClick={() => setCurrentView('baiga')} className={`hover:opacity-70 transition ${currentView === 'baiga' ? 'opacity-70' : ''}`}>{t.nav.baiga}</button>
               
               {/* Dropdown "О Нас" */}
               <div className="relative group" onMouseEnter={() => setIsAboutDropdownOpen(true)} onMouseLeave={() => setIsAboutDropdownOpen(false)}>
                 <div className="flex items-center gap-1 cursor-pointer hover:opacity-70 transition py-2">
-                   О Нас <ChevronDown size={14} />
+                   {t.nav.about} <ChevronDown size={14} />
                 </div>
                 {isAboutDropdownOpen && (
                   <div className="absolute top-full left-[-20px] w-[240px] bg-white shadow-2xl rounded-2xl p-2 z-50 animate-fade-in mt-2 border border-gray-100">
                     <div className="flex flex-col">
                        <button onClick={() => { setCurrentView('rules'); setIsAboutDropdownOpen(false); }} className="text-left flex items-center gap-3 p-3 hover:bg-gray-50 rounded-xl transition font-medium">
-                          <FileText size={18} className="text-[#FFD600]" /> Условия Таксопарка
+                          <FileText size={18} className="text-[#FFD600]" /> {t.nav.conditions}
                        </button>
                        <button onClick={() => { setCurrentView('contacts'); setIsAboutDropdownOpen(false); }} className="text-left flex items-center gap-3 p-3 hover:bg-gray-50 rounded-xl transition font-medium">
-                          <MapPin size={18} className="text-[#FFD600]" /> Контакты
+                          <MapPin size={18} className="text-[#FFD600]" /> {t.nav.contacts}
                        </button>
                     </div>
                   </div>
@@ -406,7 +575,17 @@ export default function App() {
 
             <div className="hidden lg:flex items-center gap-6">
               <a href={`tel:${PHONE_CLEAN}`} className="flex items-center gap-2 font-bold text-lg hover:opacity-70 transition"><WhatsappIcon /> {PHONE_DISPLAY}</a>
-              <span className="font-bold cursor-pointer">КЗ</span>
+              
+              {/* ПЕРЕКЛЮЧАТЕЛЬ ЯЗЫКОВ */}
+              <div className="relative group">
+                  <button className="font-bold cursor-pointer flex items-center gap-1 uppercase">
+                      {language === 'ru' ? 'РУС' : 'ҚАЗ'} <ChevronDown size={14} />
+                  </button>
+                  <div className="absolute top-full right-0 w-24 bg-white shadow-lg rounded-lg p-2 hidden group-hover:block border border-gray-100 z-50">
+                      <button onClick={() => setLanguage('ru')} className={`block w-full text-left px-3 py-2 hover:bg-gray-50 rounded text-sm font-bold ${language === 'ru' ? 'text-[#FFD600]' : ''}`}>РУС</button>
+                      <button onClick={() => setLanguage('kz')} className={`block w-full text-left px-3 py-2 hover:bg-gray-50 rounded text-sm font-bold ${language === 'kz' ? 'text-[#FFD600]' : ''}`}>ҚАЗ</button>
+                  </div>
+              </div>
             </div>
 
             <button className="lg:hidden" onClick={() => setIsMenuOpen(!isMenuOpen)}>
@@ -418,11 +597,15 @@ export default function App() {
           {isMenuOpen && (
             <div className="lg:hidden absolute top-full left-0 w-full bg-[#FFD600] shadow-2xl p-6 z-50 border-t border-black/5">
               <nav className="flex flex-col gap-6 text-xl font-bold">
-                <div onClick={() => setIsMenuOpen(false)}>Работа</div>
-                <button className="text-left" onClick={() => { setCurrentView('kaspi'); setIsMenuOpen(false); }}>Kaspi QR</button>
-                <button className="text-left" onClick={() => { setCurrentView('baiga'); setIsMenuOpen(false); }}>Байга</button>
-                <button className="text-left" onClick={() => { setCurrentView('rules'); setIsMenuOpen(false); }}>Условия</button>
-                <button className="text-left" onClick={() => { setCurrentView('contacts'); setIsMenuOpen(false); }}>Контакты</button>
+                <div onClick={() => setIsMenuOpen(false)}>{t.nav.work}</div>
+                <button className="text-left" onClick={() => { setCurrentView('kaspi'); setIsMenuOpen(false); }}>{t.nav.kaspi}</button>
+                <button className="text-left" onClick={() => { setCurrentView('baiga'); setIsMenuOpen(false); }}>{t.nav.baiga}</button>
+                <button className="text-left" onClick={() => { setCurrentView('rules'); setIsMenuOpen(false); }}>{t.nav.conditions}</button>
+                <button className="text-left" onClick={() => { setCurrentView('contacts'); setIsMenuOpen(false); }}>{t.nav.contacts}</button>
+                <div className="flex gap-4 mt-2">
+                    <button onClick={() => setLanguage('ru')} className={`font-bold ${language === 'ru' ? 'text-white' : ''}`}>РУС</button>
+                    <button onClick={() => setLanguage('kz')} className={`font-bold ${language === 'kz' ? 'text-white' : ''}`}>ҚАЗ</button>
+                </div>
                 <a href={`tel:${PHONE_CLEAN}`} className="flex items-center gap-3 text-2xl mt-4"><WhatsappIcon /> {PHONE_DISPLAY}</a>
               </nav>
             </div>
@@ -432,11 +615,11 @@ export default function App() {
 
       {/* CONTENT SWITCHER */}
       <div className="flex-grow flex flex-col w-full">
-         {currentView === 'home' && <HomePage />}
-         {currentView === 'kaspi' && <KaspiQrPage />}
-         {currentView === 'baiga' && <BaigaPage />}
-         {currentView === 'rules' && <RulesPage />}
-         {currentView === 'contacts' && <ContactsPage />}
+         {currentView === 'home' && <HomePage t={t} />}
+         {currentView === 'kaspi' && <KaspiQrPage t={t} />}
+         {currentView === 'baiga' && <BaigaPage t={t} />}
+         {currentView === 'rules' && <RulesPage t={t} />}
+         {currentView === 'contacts' && <ContactsPage t={t} />}
       </div>
 
       {/* FOOTER */}
@@ -456,22 +639,22 @@ export default function App() {
             <div className="flex gap-5 text-gray-500"><Instagram className="hover:text-white cursor-pointer transition" /><TiktokIcon /><WhatsappIcon /></div>
           </div>
           <div>
-            <h4 className="font-bold text-white mb-6 text-lg">Поддержка</h4>
+            <h4 className="font-bold text-white mb-6 text-lg">{t.footer.support}</h4>
             <ul className="space-y-5 text-gray-400 text-sm font-medium">
-              <li className="hover:text-white cursor-pointer transition">телефон</li>
-              <li className="hover:text-white cursor-pointer transition">WhatsApp</li>
+              <li className="hover:text-white cursor-pointer transition">{t.footer.phone}</li>
+              <li className="hover:text-white cursor-pointer transition">{t.footer.whatsapp}</li>
             </ul>
           </div>
           <div>
-            <h4 className="font-bold text-white mb-6 text-lg">Юридическое</h4>
+            <h4 className="font-bold text-white mb-6 text-lg">{t.footer.legal}</h4>
             <ul className="space-y-5 text-gray-400 text-sm font-medium">
-              <li className="hover:text-white cursor-pointer transition">Политика Конфиденциальности</li>
-              <li className="hover:text-white cursor-pointer transition">Условия</li>
-              <li className="pt-2 leading-relaxed font-normal text-gray-400">{ADDRESS}</li>
+              <li className="hover:text-white cursor-pointer transition">{t.footer.policy}</li>
+              <li className="hover:text-white cursor-pointer transition">{t.footer.terms}</li>
+              <li className="pt-2 leading-relaxed font-normal text-gray-400">{t.contacts.address_value}</li>
             </ul>
           </div>
         </div>
-        <div className="container mx-auto px-4 md:px-8 pt-8 text-gray-600 text-xs relative z-10">© {new Date().getFullYear()} Партнер Яндекс GO таксопарк {PARK_NAME}.</div>
+        <div className="container mx-auto px-4 md:px-8 pt-8 text-gray-600 text-xs relative z-10">© {new Date().getFullYear()} {t.footer.copyright}</div>
         <div className="absolute bottom-[-50px] right-[-50px] w-64 h-64 bg-[#FFD600] rounded-full opacity-10 pointer-events-none blur-3xl"></div>
       </footer>
     </div>
