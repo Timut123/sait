@@ -13,7 +13,7 @@ const ADDRESS_RU = "Республика Казахстан, г. Астана, �
 const ADDRESS_KZ = "Қазақстан Республикасы, Астана қ., Жәнібек Тархан көшесі, 9";
 const REGISTRATION_LINK = "https://forms.fleet.yandex.kz/forms?specification=taxi&ref_id=b14945c65dc449f286207cdfb1650fc6";
 const API_URL = "http://localhost:3001/api/baiga-leaderboard"; 
-const LOGO_URL = "5462928930428882216.jpg"; 
+const LOGO_URL = "5462928930428882216 (1).jpg"; 
 
 // Новые ссылки для футера
 const BRANDING_LINK = "https://parks.yandex/kz-ru/almaty/knowledge-base/abouttaxi/increase-revenue/priority-and-branding?section=%D0%B3%D0%B4%D0%B5-%D0%BE%D0%BA%D0%BB%D0%B5%D0%B8%D1%82%D1%8C-%D0%B0%D0%B2%D1%82%D0%BE%D0%BC%D0%BE%D0%B1%D0%B8%D0%BB%D1%8C%3F";
