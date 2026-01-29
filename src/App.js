@@ -7,13 +7,17 @@ import {
 // --- ДАННЫЕ ВАШЕГО ПАРКА ---
 const PHONE_DISPLAY = "+7 776 102 5965";
 const PHONE_CLEAN = "77761025965";
-const WHATSAPP_LINK = "https://wa.me/+77761025965"; // Ссылка на WhatsApp
+const WHATSAPP_LINK = "https://wa.me/+77761025965"; 
 const PARK_NAME = "Биік Шың!";
 const ADDRESS_RU = "Республика Казахстан, г. Астана, ул. Жанибека Тархана, 9";
 const ADDRESS_KZ = "Қазақстан Республикасы, Астана қ., Жәнібек Тархан көшесі, 9";
 const REGISTRATION_LINK = "https://forms.fleet.yandex.kz/forms?specification=taxi&ref_id=b14945c65dc449f286207cdfb1650fc6";
 const API_URL = "http://localhost:3001/api/baiga-leaderboard"; 
 const LOGO_URL = "5462928930428882216.jpg"; 
+
+// Новые ссылки для футера
+const BRANDING_LINK = "https://parks.yandex/kz-ru/almaty/knowledge-base/abouttaxi/increase-revenue/priority-and-branding?section=%D0%B3%D0%B4%D0%B5-%D0%BE%D0%BA%D0%BB%D0%B5%D0%B8%D1%82%D1%8C-%D0%B0%D0%B2%D1%82%D0%BE%D0%BC%D0%BE%D0%B1%D0%B8%D0%BB%D1%8C%3F";
+const CLASSIFIER_LINK = "https://pro.yandex.com/kz-ru/nur-sultan/knowledge-base/taxi/tariffs/auto-list?section=%D1%82%D0%B0%D1%80%D0%B8%D1%84-%C2%AB%D0%BA%D0%BE%D0%BC%D1%84%D0%BE%D1%80%D1%82%2B%C2%BB";
 
 // --- ПЕРЕВОДЫ (ТЕКСТЫ) ---
 const TRANSLATIONS = {
@@ -90,10 +94,12 @@ const TRANSLATIONS = {
       address_value: ADDRESS_RU
     },
     footer: {
-      support: "Поддержка",
+      support: "Поддержка и Инфо",
       legal: "Юридическое",
       phone: "телефон",
       whatsapp: "WhatsApp",
+      branding: "Где оклеить автомобиль?",
+      classifier: "Классификатор автомобилей",
       policy: "Политика Конфиденциальности",
       terms: "Условия",
       copyright: `Партнер Яндекс GO таксопарк ${PARK_NAME}.`
@@ -172,10 +178,12 @@ const TRANSLATIONS = {
       address_value: ADDRESS_KZ
     },
     footer: {
-      support: "Қолдау",
+      support: "Қолдау және Ақпарат",
       legal: "Заңдық",
       phone: "телефон",
       whatsapp: "WhatsApp",
+      branding: "Автокөлікті қайда жапсыруға болады?",
+      classifier: "Автокөліктер жіктеуіші",
       policy: "Құпиялылық саясаты",
       terms: "Ережелер",
       copyright: `Яндекс GO серіктес таксопаркі ${PARK_NAME}.`
@@ -639,6 +647,12 @@ export default function App() {
               </li>
               <li>
                 <a href={WHATSAPP_LINK} target="_blank" rel="noreferrer" className="hover:text-white cursor-pointer transition">{t.footer.whatsapp}</a>
+              </li>
+              <li>
+                <a href={BRANDING_LINK} target="_blank" rel="noreferrer" className="hover:text-white cursor-pointer transition">{t.footer.branding}</a>
+              </li>
+              <li>
+                <a href={CLASSIFIER_LINK} target="_blank" rel="noreferrer" className="hover:text-white cursor-pointer transition">{t.footer.classifier}</a>
               </li>
             </ul>
           </div>
