@@ -13,7 +13,7 @@ const ADDRESS_RU = "Республика Казахстан, г. Астана, �
 const ADDRESS_KZ = "Қазақстан Республикасы, Астана қ., Жәнібек Тархан көшесі, 9";
 const REGISTRATION_LINK = "https://forms.fleet.yandex.kz/forms?specification=taxi&ref_id=b14945c65dc449f286207cdfb1650fc6";
 const API_URL = "http://localhost:3001/api/baiga-leaderboard"; 
-const LOGO_URL = "5462928930428882216 (1).jpg"; 
+const LOGO_URL = "5462928930428882216.jpg"; 
 
 // --- ПЕРЕВОДЫ (ТЕКСТЫ) ---
 const TRANSLATIONS = {
@@ -516,11 +516,11 @@ export default function App() {
                 <img 
                   src={LOGO_URL} 
                   alt="Logo" 
-                  className="w-16 h-16 rounded-full border-2 border-yellow-200 object-cover shadow-md"
+                  className="w-32 h-32 md:w-40 md:h-40 rounded-full border-2 border-yellow-200 object-cover shadow-md"
                   onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'flex'; }}
                 />
-                <div className="w-14 h-14 bg-black rounded-full border-2 border-[#444] shadow-lg hidden items-center justify-center">
-                   <span className="text-[#FFD600] font-bold text-xl italic">Б</span>
+                <div className="w-32 h-32 md:w-40 md:h-40 bg-black rounded-full border-2 border-[#444] shadow-lg hidden items-center justify-center">
+                   <span className="text-[#FFD600] font-bold text-5xl italic">Б</span>
                 </div>
             </div>
 
