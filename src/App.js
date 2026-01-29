@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { 
-  Phone, Menu, X, ChevronDown, Clock, Smartphone, Instagram, 
+  Menu, X, ChevronDown, Clock, Smartphone, Instagram, 
   Car, Truck, Bike, MapPin, FileText
 } from 'lucide-react';
 
@@ -13,7 +13,7 @@ const ADDRESS_RU = "Республика Казахстан, г. Астана, �
 const ADDRESS_KZ = "Қазақстан Республикасы, Астана қ., Жәнібек Тархан көшесі, 9";
 const REGISTRATION_LINK = "https://forms.fleet.yandex.kz/forms?specification=taxi&ref_id=b14945c65dc449f286207cdfb1650fc6";
 const API_URL = "http://localhost:3001/api/baiga-leaderboard"; 
-const LOGO_URL = "5462928930428882216 (1).jpg"; 
+const LOGO_URL = "5462928930428882216.jpg"; 
 
 // --- ПЕРЕВОДЫ (ТЕКСТЫ) ---
 const TRANSLATIONS = {
