@@ -4,6 +4,7 @@ import {
   Car, Truck, Bike, MapPin, FileText
 } from 'lucide-react';
 
+// --- КОНСТАНТЫ ---
 const PHONE_DISPLAY = "+7 776 102 5965";
 const PHONE_CLEAN = "77761025965";
 const WHATSAPP_LINK = "https://wa.me/+77761025965"; 
@@ -59,8 +60,10 @@ const TRANSLATIONS = {
     kaspi: {
       title: "Kaspi QR",
       generate: "СГЕНЕРИРОВАТЬ QR",
-      desc: "Сгенерируйте QR код для пополнения счёта пассажиром",
-      placeholder: "+7 (702) 888-4911"
+      desc: "Введите номер телефона (например, 777...) и нажмите кнопку, чтобы получить QR для оплаты.",
+      placeholder: "777 123 45 67",
+      scan_title: "Сканируйте для оплаты:",
+      or_link: "Или нажмите сюда для перехода в Kaspi"
     },
     baiga: {
       title: "Байга",
@@ -143,8 +146,10 @@ const TRANSLATIONS = {
     kaspi: {
       title: "Kaspi QR",
       generate: "QR ГЕНЕРАЦИЯЛАУ",
-      desc: "Жолаушы шотыңызды толтыру үшін QR кодты генерациялаңыз",
-      placeholder: "+7 (702) 888-4911"
+      desc: "Телефон нөмірін енгізіп (мысалы 777...), төлем жасау үшін QR кодын алыңыз.",
+      placeholder: "777 123 45 67",
+      scan_title: "Төлеу үшін сканерлеңіз:",
+      or_link: "Немесе Kaspi-ге өту үшін осында басыңыз"
     },
     baiga: {
       title: "Бәйге",
@@ -339,19 +344,81 @@ const HomePage = ({ t }) => (
   </div>
 );
 
-// 2. KASPI QR
-const KaspiQrPage = ({ t }) => (
-  <div className="flex-grow bg-white py-20 min-h-[60vh] flex flex-col items-start justify-center animate-fade-in w-full">
-    <div className="container mx-auto px-4 md:px-8 max-w-6xl">
-      <h1 className="text-3xl font-bold mb-10 text-[#1d1d1d]">{t.kaspi.title}</h1>
-      <div className="flex flex-col md:flex-row gap-6 items-stretch w-full">
-        <input type="text" placeholder={t.kaspi.placeholder} className="bg-[#EFF2F7] border-none rounded-md px-6 py-4 text-lg w-full md:w-2/3 outline-none focus:ring-2 focus:ring-[#FFD600] text-gray-700" />
-        <button className="bg-[#FFD600] hover:bg-[#e6c200] text-[#1d1d1d] font-bold px-8 py-4 rounded-md uppercase tracking-wide transition shadow-sm w-full md:w-1/3">{t.kaspi.generate}</button>
+// 2. KASPI QR (С ГЕНЕРАЦИЕЙ ССЫЛКИ)
+const KaspiQrPage = ({ t }) => {
+  const [phoneInput, setPhoneInput] = useState("");
+  const [generatedData, setGeneratedData] = useState(null);
+
+  const handleGenerate = () => {
+    // 1. Очищаем номер от скобок, пробелов и символов
+    let clean = phoneInput.replace(/\D/g, '');
+    
+    // Если номер начинается с 8, меняем на 7 (стандартный формат для KZ)
+    if (clean.startsWith('8')) {
+      clean = '7' + clean.slice(1);
+    }
+    
+    // Простая валидация (если пусто)
+    if (clean.length < 10) return;
+
+    // 2. Формируем вашу ссылку
+    const link = `https://kaspi.kz/pay/TaksoparkBiikSHin?18627=${clean}`;
+    
+    // 3. Генерируем QR через публичное API
+    const qrImg = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(link)}`;
+
+    setGeneratedData({ link, qrImg });
+  };
+
+  return (
+    <div className="flex-grow bg-white py-20 min-h-[60vh] flex flex-col items-start justify-center animate-fade-in w-full">
+      <div className="container mx-auto px-4 md:px-8 max-w-6xl">
+        <h1 className="text-3xl font-bold mb-10 text-[#1d1d1d]">{t.kaspi.title}</h1>
+        
+        {/* Форма ввода */}
+        <div className="flex flex-col md:flex-row gap-6 items-stretch w-full mb-10">
+          <input 
+            type="tel" 
+            value={phoneInput}
+            onChange={(e) => setPhoneInput(e.target.value)}
+            placeholder={t.kaspi.placeholder} 
+            className="bg-[#EFF2F7] border-none rounded-md px-6 py-4 text-lg w-full md:w-2/3 outline-none focus:ring-2 focus:ring-[#FFD600] text-gray-700" 
+          />
+          <button 
+            onClick={handleGenerate}
+            className="bg-[#FFD600] hover:bg-[#e6c200] text-[#1d1d1d] font-bold px-8 py-4 rounded-md uppercase tracking-wide transition shadow-sm w-full md:w-1/3"
+          >
+            {t.kaspi.generate}
+          </button>
+        </div>
+
+        {/* Результат генерации */}
+        {generatedData && (
+          <div className="flex flex-col items-center justify-center w-full bg-gray-50 rounded-2xl p-8 border border-gray-200 animate-fade-in">
+            <h3 className="text-xl font-bold mb-6 text-gray-800">{t.kaspi.scan_title}</h3>
+            
+            <div className="bg-white p-4 rounded-xl shadow-lg mb-6">
+              <img src={generatedData.qrImg} alt="Kaspi QR" className="w-64 h-64 object-contain" />
+            </div>
+
+            <a 
+              href={generatedData.link} 
+              target="_blank" 
+              rel="noreferrer"
+              className="text-[#E53935] font-bold text-lg hover:underline underline-offset-4"
+            >
+              {t.kaspi.or_link}
+            </a>
+          </div>
+        )}
+
+        {!generatedData && (
+           <p className="text-gray-500 mt-2 text-lg">{t.kaspi.desc}</p>
+        )}
       </div>
-      <p className="text-gray-500 mt-8 text-lg">{t.kaspi.desc}</p>
     </div>
-  </div>
-);
+  );
+};
 
 // 3. БАЙГА
 const BaigaPage = ({ t }) => {
@@ -535,16 +602,16 @@ export default function App() {
                   <div className="absolute top-full left-[-50px] w-[380px] bg-white shadow-2xl rounded-2xl p-2 z-50 animate-fade-in mt-2 border border-gray-100">
                     <div className="flex flex-col p-2">
                       <a href={REGISTRATION_LINK} target="_blank" rel="noreferrer" className="flex items-start gap-4 p-3 hover:bg-gray-50 rounded-xl transition group/item">
-                         <div className="text-gray-400 group-hover/item:text-[#FFD600] mt-1"><Car size={20} /></div>
-                         <div><div className="font-bold text-base text-gray-900">{t.nav.driver}</div><div className="text-xs text-gray-500 mt-1">{t.nav.work_desc_driver}</div></div>
+                          <div className="text-gray-400 group-hover/item:text-[#FFD600] mt-1"><Car size={20} /></div>
+                          <div><div className="font-bold text-base text-gray-900">{t.nav.driver}</div><div className="text-xs text-gray-500 mt-1">{t.nav.work_desc_driver}</div></div>
                       </a>
                       <a href={REGISTRATION_LINK} target="_blank" rel="noreferrer" className="flex items-start gap-4 p-3 hover:bg-gray-50 rounded-xl transition group/item">
-                         <div className="text-gray-400 group-hover/item:text-[#FFD600] mt-1"><Bike size={20} /></div>
-                         <div><div className="font-bold text-base text-gray-900">{t.nav.courier}</div><div className="text-xs text-gray-500 mt-1">{t.nav.work_desc_courier}</div></div>
+                          <div className="text-gray-400 group-hover/item:text-[#FFD600] mt-1"><Bike size={20} /></div>
+                          <div><div className="font-bold text-base text-gray-900">{t.nav.courier}</div><div className="text-xs text-gray-500 mt-1">{t.nav.work_desc_courier}</div></div>
                       </a>
                       <a href={REGISTRATION_LINK} target="_blank" rel="noreferrer" className="flex items-start gap-4 p-3 hover:bg-gray-50 rounded-xl transition group/item">
-                         <div className="text-gray-400 group-hover/item:text-[#FFD600] mt-1"><Truck size={20} /></div>
-                         <div><div className="font-bold text-base text-gray-900">{t.nav.cargo}</div><div className="text-xs text-gray-500 mt-1">{t.nav.work_desc_cargo}</div></div>
+                          <div className="text-gray-400 group-hover/item:text-[#FFD600] mt-1"><Truck size={20} /></div>
+                          <div><div className="font-bold text-base text-gray-900">{t.nav.cargo}</div><div className="text-xs text-gray-500 mt-1">{t.nav.work_desc_cargo}</div></div>
                       </a>
                     </div>
                   </div>
@@ -561,12 +628,12 @@ export default function App() {
                 {isAboutDropdownOpen && (
                   <div className="absolute top-full left-[-20px] w-[240px] bg-white shadow-2xl rounded-2xl p-2 z-50 animate-fade-in mt-2 border border-gray-100">
                     <div className="flex flex-col">
-                       <button onClick={() => { setCurrentView('rules'); setIsAboutDropdownOpen(false); }} className="text-left flex items-center gap-3 p-3 hover:bg-gray-50 rounded-xl transition font-medium">
-                          <FileText size={18} className="text-[#FFD600]" /> {t.nav.conditions}
-                       </button>
-                       <button onClick={() => { setCurrentView('contacts'); setIsAboutDropdownOpen(false); }} className="text-left flex items-center gap-3 p-3 hover:bg-gray-50 rounded-xl transition font-medium">
-                          <MapPin size={18} className="text-[#FFD600]" /> {t.nav.contacts}
-                       </button>
+                        <button onClick={() => { setCurrentView('rules'); setIsAboutDropdownOpen(false); }} className="text-left flex items-center gap-3 p-3 hover:bg-gray-50 rounded-xl transition font-medium">
+                           <FileText size={18} className="text-[#FFD600]" /> {t.nav.conditions}
+                        </button>
+                        <button onClick={() => { setCurrentView('contacts'); setIsAboutDropdownOpen(false); }} className="text-left flex items-center gap-3 p-3 hover:bg-gray-50 rounded-xl transition font-medium">
+                           <MapPin size={18} className="text-[#FFD600]" /> {t.nav.contacts}
+                        </button>
                     </div>
                   </div>
                 )}
